@@ -1,29 +1,40 @@
 #include <iostream>
+#include <fstream>
+#include <vector>
 #include <unordered_set>
 using namespace std;
 
-void printPairs(int arr[], int arr_size, int sum) {
-  unordered_set<int> s;
-  for (int i = 0; i < arr_size; i++) {
-      int temp = sum - arr[i];
+void findPairs(vector<double> data, int vec_size, int sum) {
+  unordered_set<double> s;
+  for (int i = 0; i < vec_size; i++) {
+      int temp = sum - data[i];
 
       if (s.find(temp) != s.end()) {
-        cout << "Pair with given sum " << sum << " is (" << arr[i] << ", " << temp << ")" << endl;
-        cout << "Multiplying them gives us: " << arr[i] * temp << endl;
+        cout << "Pair with given sum " << sum << " is (" << data[i] << ", " << temp << ")" << endl;
+        cout << "Multiplying them gives us: " << data[i] * temp << endl;
       }
-      s.insert(arr[i]);
+      s.insert(data[i]);
   }
 }
 
 int main() {
-  // insert dataset here
-  int dataSet[] = { 1, 4, 45, 6, 10, 8 };
+  // insert dataset to vector here
+  vector<double> dataSet;
+  ifstream inputFile("aocday1_1data.txt");
+
+  double currNum;
+  while(inputFile >> currNum) {
+    dataSet.push_back(currNum);
+  }
+
+  inputFile.close();
+
   // sum size here
   int n = 2020;
-  int arr_size = sizeof(dataSet) / sizeof(dataSet[0]);
+  int vec_size = dataSet.size();
 
-  // Function calling
-  printPairs(dataSet, arr_size, n);
+  // call findPairs to get our pairs
+  findPairs(dataSet, vec_size, n);
 
   return 0;
 }
