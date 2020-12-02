@@ -88,5 +88,27 @@ int validPass1(vector<passwordPolicy> passVect) {
 }
 
 int validPass2(vector<passwordPolicy> passVect) {
-  
+  // var for total valid
+  int valid = 0;
+
+  for(unsigned int i = 0; i < passVect.size(); i++) {
+    // current password
+    string currPass = passVect[i].password;
+    // first and second index (subtract 1 to get index)
+    int first = passVect[i].lowNum - 1;
+    int second = passVect[i].highNum - 1;
+
+    if(currPass[first] == passVect[i].character && currPass[second] == passVect[i].character) {
+      // if both are the character, this is invalid
+    }
+    // if the first OR second are valid, increment
+    else if(currPass[first] == passVect[i].character) {
+      valid++;
+    }
+    else if(currPass[second] == passVect[i].character) {
+      valid++;
+    }
+  }
+
+  return valid;
 }
